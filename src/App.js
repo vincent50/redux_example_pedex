@@ -3,16 +3,19 @@ import Searcher from './components/Search';
 import PokemonList from './components/PokemonList';
 import Logo from './statics/logo.svg'
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import getPokemon from './api';
+import { setPokemons } from './actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const [pokemons, setPokemon] = useState([]);
+  const pokemons = useSelector(state => state.pokemons);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchPokemon = async () => {
       const pokemonRes = await getPokemon();
-      setPokemon(pokemonRes);
+      dispatch(setPokemons(pokemonRes));
     } 
 
     fetchPokemon();
