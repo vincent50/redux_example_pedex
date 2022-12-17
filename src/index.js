@@ -8,14 +8,20 @@ import { applyMiddleware,
   compose,
   legacy_createStore as createStore, 
 } from 'redux';
-import { logger } from './middlewares'
+import { 
+  logger, 
+//  featuring 
+} from './middlewares'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const composEnhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(logger),
+  applyMiddleware(
+    logger, 
+    // featuring, // Permite agregar un pokemon personalizado al inicio
+  ),
 )
 
 const store = createStore(pokemonReducer, composEnhancers)
