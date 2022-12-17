@@ -1,6 +1,7 @@
 import React from 'react';
 import App from './App';
 import './index.css';
+import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom/client';
 import { pokemonReducer } from './reducers/pokemons';
 import { Provider } from 'react-redux';
@@ -16,9 +17,10 @@ import {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const composEnhancers = compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const composEnhancers = composeAlt(applyMiddleware(
+    thunk,
     logger, 
     // featuring, // Permite agregar un pokemon personalizado al inicio
   ),
